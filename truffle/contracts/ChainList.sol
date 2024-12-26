@@ -28,4 +28,21 @@ contract ChainList {
     ) {
         return (seller, name, description, price);
     }
+
+    /// @notice Sell an article by setting its details
+    /// @param _seller The address of the seller
+    /// @param _name The name of the article
+    /// @param _description The description of the article
+    /// @param _price The price of the article in wei
+    function sellArticle(
+        address _seller,
+        string memory _name,
+        string memory _description,
+        uint256 _price
+    ) public {
+        seller = _seller;
+        name = _name;
+        description = _description;
+        price = _price;
+    }
 }
