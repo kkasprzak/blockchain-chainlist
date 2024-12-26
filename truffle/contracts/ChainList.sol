@@ -6,26 +6,26 @@ pragma solidity >=0.4.22 <0.9.0;
 contract ChainList {
     // State variables
     address seller;
-    string articleName;
-    string articleDescription;
-    uint256 articlePrice;
+    string name;
+    string description;
+    uint256 price;
 
     constructor() {
         // Initialize with empty values
         seller = address(0);
-        articleName = "";
-        articleDescription = "";
-        articlePrice = 0;
+        name = "";
+        description = "";
+        price = 0;
     }
 
     /// @notice Get the current article information
-    /// @return The seller's address, article name, description, and price
+    /// @return The seller's address, name, description, and price
     function getArticle() public view returns (
         address,
         string memory,
         string memory,
         uint256
     ) {
-        return (seller, articleName, articleDescription, articlePrice);
+        return (seller, name, description, price);
     }
 }
