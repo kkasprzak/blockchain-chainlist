@@ -12,8 +12,13 @@ function ContractBtns({ setValue }) {
   };
 
   const read = async () => {
-    const value = await contract.methods.read().call({ from: accounts[0] });
-    setValue(value);
+    const value = await contract.methods.getArticle().call({ from: accounts[0] });
+    setValue({
+      "seller": value[0],
+      "name": value[1],
+      "description": value[2],
+      "price": value[3],
+    });
   };
 
   const write = async e => {
@@ -25,7 +30,12 @@ function ContractBtns({ setValue }) {
       return;
     }
     const newValue = parseInt(inputValue);
-    await contract.methods.write(newValue).send({ from: accounts[0] });
+    await contract.methods.sellArticle(
+      accounts[0],
+      "new name",
+      "new description",
+      newValue
+    ).send({ from: accounts[0] });
   };
 
   return (

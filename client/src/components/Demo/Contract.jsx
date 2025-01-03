@@ -15,11 +15,32 @@ function Contract({ value }) {
 
   return (
     <code>
-      {`contract SimpleStorage {
-  uint256 value = `}
+      {`contract ChainList {
+  address seller = `}
 
       <span className="secondary-color" ref={spanEle}>
-        <strong>{value}</strong>
+        <strong>{value.seller}</strong>
+      </span>
+
+      {`;
+  string name = `}
+
+      <span className="secondary-color" ref={spanEle}>
+        <strong>{value.name}</strong>
+      </span>
+
+      {`;
+  string description = `}
+
+      <span className="secondary-color" ref={spanEle}>
+        <strong>{value.description}</strong>
+      </span>
+
+      {`;
+  string price = `}
+
+      <span className="secondary-color" ref={spanEle}>
+        <strong>{value.price}</strong>
       </span>
 
       {`;
