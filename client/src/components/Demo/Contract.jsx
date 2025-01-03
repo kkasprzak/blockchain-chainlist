@@ -14,46 +14,26 @@ function Contract({ value }) {
   }, [value]);
 
   return (
-    <code>
-      {`contract ChainList {
-  address seller = `}
-
-      <span className="secondary-color" ref={spanEle}>
-        <strong>{value.seller}</strong>
-      </span>
-
-      {`;
-  string name = `}
-
-      <span className="secondary-color" ref={spanEle}>
-        <strong>{value.name}</strong>
-      </span>
-
-      {`;
-  string description = `}
-
-      <span className="secondary-color" ref={spanEle}>
-        <strong>{value.description}</strong>
-      </span>
-
-      {`;
-  string price = `}
-
-      <span className="secondary-color" ref={spanEle}>
-        <strong>{value.price}</strong>
-      </span>
-
-      {`;
-
-  function read() public view returns (uint256) {
-    return value;
-  }
-
-  function write(uint256 newValue) public {
-    value = newValue;
-  }
-}`}
-    </code>
+    <div className="contract-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Seller</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span className="secondary-color" ref={spanEle}><strong>{value.seller}</strong></span></td>
+            <td><span className="secondary-color"><strong>{value.name}</strong></span></td>
+            <td><span className="secondary-color"><strong>{value.description}</strong></span></td>
+            <td><span className="secondary-color"><strong>{value.price}</strong></span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   );
 }
 
