@@ -3,11 +3,14 @@ import useEth from "../../contexts/EthContext/useEth";
 
 function ContractBtns({ setValue }) {
   const { state: { contract, accounts } } = useEth();
-  const [inputValue, setInputValue] = useState("");
+  const [seller, setSeller] = useState(accounts[0]);
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
 
-  const handleInputChange = e => {
+  const handlePriceChange = e => {
     if (/^\d+$|^$/.test(e.target.value)) {
-      setInputValue(e.target.value);
+      setPrice(e.target.value);
     }
   };
 
@@ -25,34 +28,71 @@ function ContractBtns({ setValue }) {
     if (e.target.tagName === "INPUT") {
       return;
     }
-    if (inputValue === "") {
-      alert("Please enter a value to write.");
+    if (price === "") {
+      alert("Please enter a price value.");
       return;
     }
-    const newValue = parseInt(inputValue);
+    const priceValue = parseInt(price);
     await contract.methods.sellArticle(
-      accounts[0],
-      "new name",
-      "new description",
-      newValue
+      seller,
+      name,
+      description,
+      priceValue
     ).send({ from: accounts[0] });
+    
+    // Reset form after successful submission
+    setName("");
+    setDescription("");
+    setPrice("");
+    // Don't reset seller as it should stay as accounts[0]
   };
 
   return (
     <div className="btns">
 
+      <div className="multi-field-form">
+        <div className="form-group">
+          <label>Seller Address:</label>
+          <input
+            type="text"
+            value={seller}
+            onChange={e => setSeller(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label>Article Name:</label>
+          <input
+            type="text"
+            value={name}
+            onChange={e => setName(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label>Description:</label>
+          <input
+            type="text"
+            value={description}
+            onChange={e => setDescription(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label>Price:</label>
+          <input
+            type="text"
+            placeholder="uint"
+            value={price}
+            onChange={handlePriceChange}
+          />
+        </div>
+      </div>
+
       <button onClick={read}>
         read()
       </button>
 
-      <div onClick={write} className="input-btn">
-        write(<input
-          type="text"
-          placeholder="uint"
-          value={inputValue}
-          onChange={handleInputChange}
-        />)
-      </div>
+      <button onClick={write} className="input-btn">
+        write()
+      </button>
 
     </div>
   );
