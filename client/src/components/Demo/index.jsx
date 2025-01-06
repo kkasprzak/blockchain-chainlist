@@ -2,8 +2,10 @@ import { useState } from "react";
 import useEth from "../../contexts/EthContext/useEth";
 import Contract from "./Contract";
 import ContractBtns from "./ContractBtns";
+import UserDetails from "./UserDetails";
 import NoticeNoArtifact from "./NoticeNoArtifact";
 import NoticeWrongNetwork from "./NoticeWrongNetwork";
+import Container from '@mui/material/Container';
 
 function Demo() {
   const { state } = useEth();
@@ -15,23 +17,20 @@ function Demo() {
   });
 
   const demo =
-    <>
-      <div className="contract-form">
+    <div>
+        <UserDetails />
         <ContractBtns setValue={setValue} />
-      </div>
-      <div className="contract-container">
         <Contract value={value} />
-      </div>
-    </>;
+    </div>;
 
   return (
-    <div className="demo">
+    <Container maxWidth="md">
       {
         !state.artifact ? <NoticeNoArtifact /> :
           !state.contract ? <NoticeWrongNetwork /> :
             demo
       }
-    </div>
+    </Container>
   );
 }
 

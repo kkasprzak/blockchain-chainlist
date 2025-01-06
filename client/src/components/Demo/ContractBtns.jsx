@@ -1,5 +1,10 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import useEth from "../../contexts/EthContext/useEth";
+import TextField from '@mui/material/TextField';
+import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Paper from '@mui/material/Paper';
 
 function ContractBtns({ setValue }) {
   const { state: { contract, accounts } } = useEth();
@@ -50,53 +55,48 @@ function ContractBtns({ setValue }) {
 
   return (
     <div>
-
-      <div className="multi-field-form">
-        <div className="form-group">
-          <label>Seller Address:</label>
-          <input
-            type="text"
-            value={seller}
-            onChange={e => setSeller(e.target.value)}
-          />
-        </div>
-        <div className="form-group">
-          <label>Article Name:</label>
-          <input
-            type="text"
-            value={name}
-            onChange={e => setName(e.target.value)}
-          />
-        </div>
-        <div className="form-group">
-          <label>Description:</label>
-          <input
-            type="text"
-            value={description}
-            onChange={e => setDescription(e.target.value)}
-          />
-        </div>
-        <div className="form-group">
-          <label>Price:</label>
-          <input
-            type="text"
-            placeholder="uint"
-            value={price}
-            onChange={handlePriceChange}
-          />
-        </div>
-      </div>
-
-      <div className="btns">
-        <button onClick={read} className="input-btn">
-          Read article
-        </button>
-
-        <button onClick={write} className="input-btn">
-          Update article
-        </button>
-      </div>
-
+      <Paper
+        sx={{ p: 2, m: 2, width: '100%' }}
+        elevation={5}
+      >
+        <Box component="form" noValidate autoComplete="off">
+          <Stack spacing={2}>
+            <TextField
+              id="seller-address"
+              label="Seller address"
+              variant="outlined"
+              value={seller}
+              onChange={e => setSeller(e.target.value)}
+            />
+            <TextField
+              id="article-name"
+              label="Article name"
+              variant="outlined"
+              value={name}
+              onChange={e => setName(e.target.value)}
+            />
+            <TextField
+              id="article-description"
+              label="Description"
+              multiline
+              rows={4}
+              value={description}
+              onChange={e => setDescription(e.target.value)}
+            />
+            <TextField
+              id="article-price"
+              label="Article price"
+              variant="outlined"
+              value={price}
+              onChange={handlePriceChange}
+            />
+            <Stack direction="row" spacing={2}>
+              <Button variant="contained" onClick={read}>Read article</Button>
+              <Button variant="contained" onClick={write}>Update article</Button>
+          </Stack>
+          </Stack>
+        </Box>
+      </Paper>
     </div>
   );
 }
