@@ -28,16 +28,17 @@ function ContractBtns({ setValue }) {
     if (e.target.tagName === "INPUT") {
       return;
     }
+    
     if (price === "") {
       alert("Please enter a price value.");
       return;
     }
-    const priceValue = parseInt(price);
+    
     await contract.methods.sellArticle(
       seller,
       name,
       description,
-      priceValue
+      parseInt(price)
     ).send({ from: accounts[0] });
     
     // Reset form after successful submission
@@ -48,7 +49,7 @@ function ContractBtns({ setValue }) {
   };
 
   return (
-    <div className="btns">
+    <div>
 
       <div className="multi-field-form">
         <div className="form-group">
@@ -86,13 +87,15 @@ function ContractBtns({ setValue }) {
         </div>
       </div>
 
-      <button onClick={read}>
-        read()
-      </button>
+      <div className="btns">
+        <button onClick={read} className="input-btn">
+          Read article
+        </button>
 
-      <button onClick={write} className="input-btn">
-        write()
-      </button>
+        <button onClick={write} className="input-btn">
+          Update article
+        </button>
+      </div>
 
     </div>
   );
