@@ -1,5 +1,6 @@
 import { useState } from "react";
 import useEth from "../../contexts/EthContext/useEth";
+import Button from '@mui/material/Button';
 
 function ContractBtns({ setValue }) {
   const { state: { contract, accounts } } = useEth();
@@ -95,6 +96,10 @@ function ContractBtns({ setValue }) {
         <button onClick={write} className="input-btn">
           Update article
         </button>
+
+        <Button variant="contained">
+          Hello world
+        </Button>
       </div>
 
     </div>
