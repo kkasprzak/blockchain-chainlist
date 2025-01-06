@@ -4,6 +4,7 @@ import Contract from "./Contract";
 import ContractBtns from "./ContractBtns";
 import NoticeNoArtifact from "./NoticeNoArtifact";
 import NoticeWrongNetwork from "./NoticeWrongNetwork";
+import Container from '@mui/material/Container';
 
 function Demo() {
   const { state } = useEth();
@@ -19,19 +20,20 @@ function Demo() {
       <div className="contract-form">
         <ContractBtns setValue={setValue} />
       </div>
+      
       <div className="contract-container">
         <Contract value={value} />
       </div>
     </>;
 
   return (
-    <div className="demo">
+    <Container maxWidth="sm">
       {
         !state.artifact ? <NoticeNoArtifact /> :
           !state.contract ? <NoticeWrongNetwork /> :
             demo
       }
-    </div>
+    </Container>
   );
 }
 
