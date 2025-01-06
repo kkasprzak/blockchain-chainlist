@@ -20,9 +20,11 @@ function Demo() {
   const demo =
     <>
       <Cta />
+      <div className="contract-form">
+        <ContractBtns setValue={setValue} />
+      </div>
       <div className="contract-container">
         <Contract value={value} />
-        <ContractBtns setValue={setValue} />
       </div>
       <Desc />
     </>;
