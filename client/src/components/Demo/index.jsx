@@ -27,7 +27,7 @@ function Demo() {
     </>;
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="md">
       {
         !state.artifact ? <NoticeNoArtifact /> :
           !state.contract ? <NoticeWrongNetwork /> :

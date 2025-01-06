@@ -1,38 +1,42 @@
-import { useRef, useEffect } from "react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper
+} from "@mui/material";
 
-function Contract({ value }) {
-  const spanEle = useRef(null);
-
-  useEffect(() => {
-    spanEle.current.classList.add("flash");
-    const flash = setTimeout(() => {
-      spanEle.current.classList.remove("flash");
-    }, 300);
-    return () => {
-      clearTimeout(flash);
-    };
-  }, [value]);
+function Contract({ value }) {  
 
   return (
     <div className="contract-table">
-      <table>
-        <thead>
-          <tr>
-            <th>Seller</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><span className="secondary-color" ref={spanEle}><strong>{value.seller}</strong></span></td>
-            <td><span className="secondary-color"><strong>{value.name}</strong></span></td>
-            <td><span className="secondary-color"><strong>{value.description}</strong></span></td>
-            <td><span className="secondary-color"><strong>{value.price}</strong></span></td>
-          </tr>
-        </tbody>
-      </table>
+      <Paper
+        sx={{ p: 2, m: 2, width: '100%' }}
+        elevation={5}
+      >
+        <TableContainer component={Paper}>
+          <Table size="small">
+            <TableHead>
+              <TableRow>
+                <TableCell>Seller</TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell>Description</TableCell>
+                <TableCell>Price</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow>
+                <TableCell>{value.seller}</TableCell>
+                <TableCell>{value.name}</TableCell>
+                <TableCell>{value.description}</TableCell>
+                <TableCell>{value.price}</TableCell>
+              </TableRow>
+          </TableBody>
+          </Table>
+        </TableContainer>
+      </Paper>
     </div>
   );
 }
