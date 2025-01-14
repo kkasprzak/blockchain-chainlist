@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useEth from "../../contexts/EthContext/useEth";
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
@@ -12,6 +12,20 @@ function ContractBtns({ setValue }) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
+
+  useEffect(() => {
+    const fetchContractData = async () => {
+      const value = await contract.methods.getArticle().call({ from: accounts[0] });
+      setValue({
+        "seller": value[0],
+        "name": value[1],
+        "description": value[2],
+        "price": value[3],
+      });
+    };
+
+    fetchContractData();
+  }, [contract, accounts, setValue]);
 
   const handlePriceChange = e => {
     if (/^\d+$|^$/.test(e.target.value)) {
@@ -47,9 +61,9 @@ function ContractBtns({ setValue }) {
     ).send({ from: accounts[0] });
     
     // Reset form after successful submission
-    setName("");
-    setDescription("");
-    setPrice("");
+    // setName("");
+    // setDescription("");
+    // setPrice("");
     // Don't reset seller as it should stay as accounts[0]
   };
 

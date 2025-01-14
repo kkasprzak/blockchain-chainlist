@@ -1,8 +1,8 @@
 IN PROGRESS:
-- Load and display contract data on application startup
 
 TODO:
 
 DONE:
+- Load and display contract data on application startup
 - Install mui for react module
 - Add user info (address and ETH balance)
