@@ -35,4 +35,18 @@ contract("ChainList", function (accounts) {
     assert.equal(value[3].toString(), web3.utils.toWei(price, "ether"), "article price is equal");
   })
   
+  it("should trigger an event when a new article is sold", async function() {
+    const chainListInstance = await ChainList.deployed();
+
+    var receipt = await chainListInstance.sellArticle(
+      accounts[1],
+      "Dummy article name",
+      "Dummy article description",
+      web3.utils.toWei("20", "ether"),
+      { from: accounts[1] }
+    );
+
+    assert.equal(receipt.logs.length, 1, "One event should have been triggered");
+    assert.equal(receipt.logs[0].event, "LogSellArticle", "event should be LogSellArticle");
+  });
 });
