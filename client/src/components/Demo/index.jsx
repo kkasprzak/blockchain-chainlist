@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useEth from "../../contexts/EthContext/useEth";
 import Contract from "./Contract";
 import ContractBtns from "./ContractBtns";
@@ -15,6 +15,41 @@ function Demo() {
     "description": "?",
     "price": "?"
   });
+
+  useEffect(() => {
+    const read = async (contract) => {
+      const value = await contract.methods.getArticle().call({ from: state.accounts[0] });
+      setValue({
+        "seller": value[0],
+        "name": value[1],
+        "description": value[2],
+        "price": value[3],
+      });
+    };
+
+    const listenToEvents = async (contract) => {
+      try {
+        contract.events.LogSellArticle(
+          {
+            fromBlock: 'latest',
+          },
+          (error, event) => {
+            if (error) {
+              console.error("Error while listening to events", error);
+            } else {
+              read(contract);
+            }
+          }
+        );
+      } catch (err) {
+        console.error("Failed to subscribe to events", err);
+      }
+    };
+
+    if (state.contract) {
+      listenToEvents(state.contract);
+    }
+  }, [state]);
 
   const demo =
     <div>

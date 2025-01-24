@@ -1,8 +1,10 @@
 IN PROGRESS:
+- Display received events as a list
 
 TODO:
 
 DONE:
+- Article gets updated aoutmatically each time it's changes (watch lesson first)
 - Load and display contract data on application startup
 - Install mui for react module
 - Add user info (address and ETH balance)
