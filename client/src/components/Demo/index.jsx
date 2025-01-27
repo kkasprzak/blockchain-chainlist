@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import useEth from "../../contexts/EthContext/useEth";
 import Contract from "./Contract";
+import EventsList from "./EventsList";
 import ContractBtns from "./ContractBtns";
 import UserDetails from "./UserDetails";
 import NoticeNoArtifact from "./NoticeNoArtifact";
@@ -15,6 +16,7 @@ function Demo() {
     "description": "?",
     "price": "?"
   });
+  const [events, setEvents] = useState([]);
 
   useEffect(() => {
     const read = async (contract) => {
@@ -38,6 +40,7 @@ function Demo() {
               console.error("Error while listening to events", error);
             } else {
               read(contract);
+              setEvents([...events, event.returnValues._name]);
             }
           }
         );
@@ -49,12 +52,13 @@ function Demo() {
     if (state.contract) {
       listenToEvents(state.contract);
     }
-  }, [state]);
+  }, [state, events]);
 
   const demo =
     <div>
         <UserDetails />
         <ContractBtns setValue={setValue} />
+        <EventsList events={events} />
         <Contract value={value} />
     </div>;
 

@@ -106,7 +106,7 @@ function ContractBtns({ setValue }) {
             />
             <Stack direction="row" spacing={2}>
               <Button variant="contained" onClick={read}>Read article</Button>
-              <Button variant="contained" onClick={write}>Update article</Button>
+              <Button variant="contained" onClick={write}>Sell article</Button>
           </Stack>
           </Stack>
         </Box>
